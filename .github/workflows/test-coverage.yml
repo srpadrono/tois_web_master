@@ -1,0 +1,120 @@
+name: Test Coverage
+
+on:
+  push:
+    # Run on all pushes to any branch
+  pull_request:
+    # Run on all pull requests
+
+jobs:
+  test-coverage:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run linter
+      run: npm run lint
+
+    - name: Run tests with coverage
+      run: npm run test:coverage
+
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v4
+      with:
+        file: ./coverage/lcov.info
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: false
+
+    - name: Update coverage badges (main branch only)
+      if: github.ref == 'refs/heads/main' && matrix.node-version == '20.x'
+      run: |
+        npm run coverage:badge
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add README.md
+        git diff --staged --quiet || git commit -m "Update coverage badges [skip ci]"
+
+    - name: Push changes (main branch only)
+      if: github.ref == 'refs/heads/main' && matrix.node-version == '20.x'
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: main
+
+    - name: Comment coverage on PR
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          const path = './coverage/coverage-final.json';
+          
+          if (fs.existsSync(path)) {
+            const coverage = JSON.parse(fs.readFileSync(path, 'utf8'));
+            
+            // Calculate overall coverage percentages
+            let totalStatements = 0, coveredStatements = 0;
+            let totalBranches = 0, coveredBranches = 0;
+            let totalFunctions = 0, coveredFunctions = 0;
+            let totalLines = 0, coveredLines = 0;
+
+            Object.values(coverage).forEach(file => {
+              if (file.s) {
+                totalStatements += Object.keys(file.s).length;
+                coveredStatements += Object.values(file.s).filter(count => count > 0).length;
+              }
+              if (file.b) {
+                Object.values(file.b).forEach(branch => {
+                  totalBranches += branch.length;
+                  coveredBranches += branch.filter(count => count > 0).length;
+                });
+              }
+              if (file.f) {
+                totalFunctions += Object.keys(file.f).length;
+                coveredFunctions += Object.values(file.f).filter(count => count > 0).length;
+              }
+              if (file.l) {
+                totalLines += Object.keys(file.l).length;
+                coveredLines += Object.values(file.l).filter(count => count > 0).length;
+              }
+            });
+
+            const stmtPct = totalStatements > 0 ? Math.round((coveredStatements / totalStatements) * 100) : 0;
+            const branchPct = totalBranches > 0 ? Math.round((coveredBranches / totalBranches) * 100) : 100;
+            const funcPct = totalFunctions > 0 ? Math.round((coveredFunctions / totalFunctions) * 100) : 0;
+            const linesPct = totalLines > 0 ? Math.round((coveredLines / totalLines) * 100) : 0;
+
+            const commentBody = `## 📊 Test Coverage Report
+            
+            | Metric | Coverage | Status |
+            |--------|----------|---------|
+            | Statements | ${stmtPct}% | ${stmtPct >= 80 ? '✅' : stmtPct >= 60 ? '⚠️' : '❌'} |
+            | Branches | ${branchPct}% | ${branchPct >= 80 ? '✅' : branchPct >= 60 ? '⚠️' : '❌'} |
+            | Functions | ${funcPct}% | ${funcPct >= 80 ? '✅' : funcPct >= 60 ? '⚠️' : '❌'} |
+            | Lines | ${linesPct}% | ${linesPct >= 80 ? '✅' : linesPct >= 60 ? '⚠️' : '❌'} |
+            
+            📄 [View detailed coverage report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: commentBody
+            });
+          } 

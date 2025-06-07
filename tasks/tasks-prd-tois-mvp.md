@@ -1,0 +1,242 @@
+# Tasks for Tois MVP Implementation
+
+## Relevant Files
+
+- `app/page.tsx` - Main landing page component
+- `app/page.test.tsx` - Unit tests for landing page
+- `components/layout/Header.tsx` - Top navigation header component
+- `components/layout/Header.test.tsx` - Unit tests for Header component
+- `components/layout/Footer.tsx` - Footer component
+- `components/layout/Footer.test.tsx` - Unit tests for Footer component
+- `components/landing/HeroSection.tsx` - Hero section component
+- `components/landing/HeroSection.test.tsx` - Unit tests for HeroSection
+- `components/landing/FeaturesSection.tsx` - Features showcase section
+- `components/landing/FeaturesSection.test.tsx` - Unit tests for FeaturesSection
+- `components/landing/PricingSection.tsx` - Pricing plans section
+- `components/landing/PricingSection.test.tsx` - Unit tests for PricingSection
+- `components/ui/Button.tsx` - Reusable button component
+- `components/ui/Button.test.tsx` - Unit tests for Button component
+- `app/globals.css` - Global styles and Tailwind configuration
+- `app/api/auth/[...auth0]/route.ts` - Auth0 authentication API routes
+- `app/api/auth/[...auth0]/route.test.ts` - Unit tests for Auth0 routes
+- `lib/auth/auth0-config.ts` - Auth0 configuration and setup
+- `lib/auth/auth0-config.test.ts` - Unit tests for Auth0 configuration
+- `components/auth/LoginForm.tsx` - User login component
+- `components/auth/LoginForm.test.tsx` - Unit tests for LoginForm
+- `components/auth/ProtectedRoute.tsx` - Route protection wrapper component
+- `components/auth/ProtectedRoute.test.tsx` - Unit tests for ProtectedRoute
+- `app/dashboard/therapist/page.tsx` - Main therapist dashboard page
+- `app/dashboard/therapist/page.test.tsx` - Unit tests for therapist dashboard
+- `app/dashboard/caregiver/page.tsx` - Main caregiver dashboard page
+- `app/dashboard/caregiver/page.test.tsx` - Unit tests for caregiver dashboard
+- `components/dashboard/TherapistHome.tsx` - Therapist home screen component
+- `components/dashboard/TherapistHome.test.tsx` - Unit tests for TherapistHome
+- `components/dashboard/QuickActions.tsx` - Quick action buttons component
+- `components/dashboard/QuickActions.test.tsx` - Unit tests for QuickActions
+- `components/dashboard/StatsOverview.tsx` - Statistics overview component
+- `components/dashboard/StatsOverview.test.tsx` - Unit tests for StatsOverview
+- `app/clients/page.tsx` - Client list page
+- `app/clients/page.test.tsx` - Unit tests for client list page
+- `app/clients/[id]/page.tsx` - Individual client profile page
+- `app/clients/[id]/page.test.tsx` - Unit tests for client profile page
+- `app/clients/new/page.tsx` - New client creation page
+- `app/clients/new/page.test.tsx` - Unit tests for new client page
+- `components/clients/ClientForm.tsx` - Client profile form component
+- `components/clients/ClientForm.test.tsx` - Unit tests for ClientForm
+- `components/clients/ClientList.tsx` - Client list display component
+- `components/clients/ClientList.test.tsx` - Unit tests for ClientList
+- `components/clients/ClientProfile.tsx` - Client profile display component
+- `components/clients/ClientProfile.test.tsx` - Unit tests for ClientProfile
+- `app/api/clients/route.ts` - Client management API routes
+- `app/api/clients/route.test.ts` - Unit tests for client API routes
+- `app/api/clients/[id]/route.ts` - Individual client API routes
+- `app/api/clients/[id]/route.test.ts` - Unit tests for individual client API
+- `app/activities/page.tsx` - Activity library page
+- `app/activities/page.test.tsx` - Unit tests for activity library page
+- `app/activities/new/page.tsx` - Custom activity creation page
+- `app/activities/new/page.test.tsx` - Unit tests for new activity page
+- `components/activities/ActivityLibrary.tsx` - Activity library browser component
+- `components/activities/ActivityLibrary.test.tsx` - Unit tests for ActivityLibrary
+- `components/activities/ActivityCard.tsx` - Individual activity display component
+- `components/activities/ActivityCard.test.tsx` - Unit tests for ActivityCard
+- `components/activities/ActivityForm.tsx` - Activity creation/edit form
+- `components/activities/ActivityForm.test.tsx` - Unit tests for ActivityForm
+- `components/activities/ActivityFilter.tsx` - Activity filtering component
+- `components/activities/ActivityFilter.test.tsx` - Unit tests for ActivityFilter
+- `app/api/activities/route.ts` - Activity management API routes
+- `app/api/activities/route.test.ts` - Unit tests for activity API routes
+- `app/api/activities/upload/route.ts` - Activity image upload API
+- `app/api/activities/upload/route.test.ts` - Unit tests for upload API
+- `app/programs/page.tsx` - Program list page
+- `app/programs/page.test.tsx` - Unit tests for program list page
+- `app/programs/new/page.tsx` - Program builder page
+- `app/programs/new/page.test.tsx` - Unit tests for program builder page
+- `app/programs/[id]/page.tsx` - Individual program view page
+- `app/programs/[id]/page.test.tsx` - Unit tests for program view page
+- `components/programs/ProgramBuilder.tsx` - Program creation interface
+- `components/programs/ProgramBuilder.test.tsx` - Unit tests for ProgramBuilder
+- `components/programs/ActivitySelector.tsx` - Activity selection component
+- `components/programs/ActivitySelector.test.tsx` - Unit tests for ActivitySelector
+- `components/programs/ProgramPreview.tsx` - Program preview component
+- `components/programs/ProgramPreview.test.tsx` - Unit tests for ProgramPreview
+- `app/api/programs/route.ts` - Program management API routes
+- `app/api/programs/route.test.ts` - Unit tests for program API routes
+- `app/api/programs/[id]/route.ts` - Individual program API routes
+- `app/api/programs/[id]/route.test.ts` - Unit tests for individual program API
+- `app/caregiver/programs/page.tsx` - Caregiver program view page
+- `app/caregiver/programs/page.test.tsx` - Unit tests for caregiver programs page
+- `app/caregiver/programs/[id]/page.tsx` - Individual program for caregiver
+- `app/caregiver/programs/[id]/page.test.tsx` - Unit tests for caregiver program view
+- `components/caregiver/ProgramView.tsx` - Caregiver program display component
+- `components/caregiver/ProgramView.test.tsx` - Unit tests for ProgramView
+- `components/caregiver/ActivityTracker.tsx` - Activity completion tracking component
+- `components/caregiver/ActivityTracker.test.tsx` - Unit tests for ActivityTracker
+- `components/caregiver/FeedbackForm.tsx` - Activity feedback form component
+- `components/caregiver/FeedbackForm.test.tsx` - Unit tests for FeedbackForm
+- `app/api/feedback/route.ts` - Feedback submission API routes
+- `app/api/feedback/route.test.ts` - Unit tests for feedback API routes
+- `app/reports/page.tsx` - Progress reports page
+- `app/reports/page.test.tsx` - Unit tests for reports page
+- `components/reports/CompletionSummary.tsx` - Completion summary component
+- `components/reports/CompletionSummary.test.tsx` - Unit tests for CompletionSummary
+- `components/reports/ProgressChart.tsx` - Progress visualization component
+- `components/reports/ProgressChart.test.tsx` - Unit tests for ProgressChart
+- `app/api/reports/route.ts` - Reports generation API routes
+- `app/api/reports/route.test.ts` - Unit tests for reports API routes
+- `lib/notifications/email-service.ts` - Email notification service
+- `lib/notifications/email-service.test.ts` - Unit tests for email service
+- `lib/notifications/notification-templates.ts` - Email template definitions
+- `lib/notifications/notification-templates.test.ts` - Unit tests for templates
+- `app/api/notifications/route.ts` - Notification sending API routes
+- `app/api/notifications/route.test.ts` - Unit tests for notifications API
+- `components/notifications/NotificationCenter.tsx` - In-app notification component
+- `components/notifications/NotificationCenter.test.tsx` - Unit tests for NotificationCenter
+- `lib/database/schema.ts` - Database schema definitions
+- `lib/database/migrations/` - Database migration files
+- `lib/utils/validation.ts` - Form validation utilities
+- `lib/utils/validation.test.ts` - Unit tests for validation utilities
+- `lib/stores/auth-store.ts` - Zustand store for authentication state
+- `lib/stores/auth-store.test.ts` - Unit tests for auth store
+- `lib/stores/client-store.ts` - Zustand store for client management
+- `lib/stores/client-store.test.ts` - Unit tests for client store
+- `lib/stores/activity-store.ts` - Zustand store for activity management
+- `lib/stores/activity-store.test.ts` - Unit tests for activity store
+- `lib/stores/program-store.ts` - Zustand store for program management
+- `lib/stores/program-store.test.ts` - Unit tests for program store
+
+### Notes
+
+- Unit tests should typically be placed alongside the code files they are testing (e.g., `MyComponent.tsx` and `MyComponent.test.tsx` in the same directory).
+- Use `npx jest [optional/path/to/test/file]` to run tests. Running without a path executes all tests found by the Jest configuration.
+- Auth0 MCP is used for tenant management through AI assistants, while @auth0/nextjs-auth0 SDK is used for actual authentication implementation.
+
+## Tasks
+
+- [ ] 1.0 Create Basic SaaS Landing Page with Navigation
+  - [x] 1.1 Design and implement main landing page layout structure
+  - [x] 1.2 Build Header component with top navigation menu
+  - [x] 1.3 Add Login button to header navigation
+  - [x] 1.4 Create HeroSection component with compelling value proposition
+  - [x] 1.5 Build FeaturesSection highlighting key product benefits
+  - [x] 1.6 Implement PricingSection with subscription tiers
+  - [x] 1.7 Create Footer component with links and company information
+  - [x] 1.8 Add responsive design for mobile, tablet, and desktop
+  - [x] 1.9 Style components using Tailwind CSS and modern design principles
+  - [x] 1.10 Implement smooth scrolling navigation and call-to-action buttons
+  - [ ] 1.11 Write unit tests for all landing page components
+
+- [ ] 2.0 Set up Authentication & User Management System using Auth0 MCP + SDK
+  - [ ] 2.1 Install and configure Auth0 MCP Server for Cursor to manage Auth0 tenant
+  - [ ] 2.2 Use Auth0 MCP through Cursor to create Auth0 application configuration
+  - [ ] 2.3 Use Auth0 MCP to configure user roles (therapist vs caregiver) in Auth0 tenant
+  - [ ] 2.4 Use Auth0 MCP to set up Auth0 Rules/Actions for role-based access control
+  - [ ] 2.5 Install @auth0/nextjs-auth0 SDK for Next.js App Router integration
+  - [ ] 2.6 Create Auth0 configuration file with environment variables from MCP setup
+  - [ ] 2.7 Implement Auth0 API routes for authentication handlers using Next.js SDK
+  - [ ] 2.8 Build LoginForm component with Auth0 SDK integration
+  - [ ] 2.9 Create ProtectedRoute wrapper component for route protection
+  - [ ] 2.10 Set up password reset functionality through Auth0 Universal Login
+  - [ ] 2.11 Create Zustand store for authentication state management
+  - [ ] 2.12 Write unit tests for authentication components and utilities
+
+- [ ] 3.0 Build Therapist Dashboard and Core Navigation
+  - [ ] 3.1 Create main therapist dashboard page layout
+  - [ ] 3.2 Build TherapistHome component showing assigned clients
+  - [ ] 3.3 Implement QuickActions component with "Create Program" and "Add Client" buttons
+  - [ ] 3.4 Create StatsOverview component displaying program completion statistics
+  - [ ] 3.5 Build navigation menu for accessing different sections
+  - [ ] 3.6 Implement responsive design for desktop, tablet, and mobile
+  - [ ] 3.7 Add recent caregiver feedback display section
+  - [ ] 3.8 Write unit tests for dashboard components
+
+- [ ] 4.0 Implement Client Profile Management
+  - [ ] 4.1 Design and create database schema for client profiles
+  - [ ] 4.2 Build client list page showing all assigned clients
+  - [ ] 4.3 Create ClientForm component for adding/editing client information
+  - [ ] 4.4 Implement individual client profile page with details and history
+  - [ ] 4.5 Build ClientList component with search and filtering capabilities
+  - [ ] 4.6 Create API routes for client CRUD operations
+  - [ ] 4.7 Add notes fields for diagnosis and sensory needs documentation
+  - [ ] 4.8 Implement program history tracking for each client
+  - [ ] 4.9 Create Zustand store for client state management
+  - [ ] 4.10 Write unit tests for client management components and API routes
+
+- [ ] 5.0 Create Activity Library and Management System
+  - [ ] 5.1 Design database schema for activities with categories and media
+  - [ ] 5.2 Create seed data with 50-100 preloaded pediatric sensory activities
+  - [ ] 5.3 Build ActivityLibrary component with browsing and search functionality
+  - [ ] 5.4 Create ActivityCard component for displaying individual activities
+  - [ ] 5.5 Implement ActivityFilter component for filtering by sensory type
+  - [ ] 5.6 Build ActivityForm component for creating custom activities
+  - [ ] 5.7 Implement secure image upload functionality for activity media
+  - [ ] 5.8 Create API routes for activity management and file uploads
+  - [ ] 5.9 Add activity categorization system (tactile, vestibular, proprioceptive, etc.)
+  - [ ] 5.10 Create Zustand store for activity state management
+  - [ ] 5.11 Write unit tests for activity components and API routes
+
+- [ ] 6.0 Build Home Program Builder Interface
+  - [ ] 6.1 Design database schema for programs and program-activity relationships
+  - [ ] 6.2 Create program builder page with step-by-step workflow
+  - [ ] 6.3 Build ActivitySelector component for choosing 3-10 activities
+  - [ ] 6.4 Implement frequency setting interface for each selected activity
+  - [ ] 6.5 Create input fields for parent-friendly instructions
+  - [ ] 6.6 Build ProgramPreview component showing final program layout
+  - [ ] 6.7 Implement save as draft functionality
+  - [ ] 6.8 Create program publishing and assignment workflow
+  - [ ] 6.9 Add program duplication and modification capabilities
+  - [ ] 6.10 Create API routes for program CRUD operations
+  - [ ] 6.11 Create Zustand store for program builder state
+  - [ ] 6.12 Write unit tests for program builder components and API routes
+
+- [ ] 7.0 Develop Caregiver Interface and Feedback System
+  - [ ] 7.1 Create caregiver dashboard page showing assigned programs
+  - [ ] 7.2 Build ProgramView component displaying activities with instructions
+  - [ ] 7.3 Create ActivityTracker component for marking completion (yes/no)
+  - [ ] 7.4 Implement FeedbackForm component with emoji response scale (😊😐☹️)
+  - [ ] 7.5 Design responsive interface optimized for mobile devices
+  - [ ] 7.6 Create API routes for feedback submission and completion tracking
+  - [ ] 7.7 Implement activity log for tracking caregiver interactions
+  - [ ] 7.8 Add program assignment notification display
+  - [ ] 7.9 Write unit tests for caregiver interface components and API routes
+
+- [ ] 8.0 Implement Progress Tracking and Basic Reporting
+  - [ ] 8.1 Design database schema for feedback and completion tracking
+  - [ ] 8.2 Create reports page for therapists to view progress data
+  - [ ] 8.3 Build CompletionSummary component showing weekly completion rates
+  - [ ] 8.4 Implement ProgressChart component for visualizing completion trends
+  - [ ] 8.5 Create API routes for generating progress reports
+  - [ ] 8.6 Add historical feedback viewing for treatment planning
+  - [ ] 8.7 Implement basic analytics for program engagement patterns
+  - [ ] 8.8 Create child response pattern tracking and visualization
+  - [ ] 8.9 Write unit tests for reporting components and API routes
+
+- [ ] 9.0 Set up Communication and Notification System
+  - [ ] 9.1 Configure email service integration (SendGrid or AWS SES)
+  - [ ] 9.2 Create email notification templates for program assignments
+  - [ ] 9.3 Build email service module for sending notifications
+  - [ ] 9.4 Implement NotificationCenter component for in-app notifications
+  - [ ] 9.5 Create API routes for sending and managing notifications
+  - [ ] 9.6 Set up email notifications for program updates and assignments
+  - [ ] 9.7 Implement notification preferences for caregivers
+  - [ ] 9.8 Add notification delivery tracking and status updates
+  - [ ] 9.9 Write unit tests for notification system components and services 
