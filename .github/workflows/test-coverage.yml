@@ -6,6 +6,9 @@ on:
   pull_request:
     # Run on all pull requests
 
+permissions:
+  contents: write
+
 jobs:
   test-coverage:
     runs-on: ubuntu-latest
