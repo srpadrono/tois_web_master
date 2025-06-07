@@ -145,19 +145,18 @@
   - [x] 1.10 Implement smooth scrolling navigation and call-to-action buttons
   - [ ] 1.11 Write unit tests for all landing page components
 
-- [ ] 2.0 Set up Authentication & User Management System using Auth0 MCP + SDK
-  - [ ] 2.1 Install and configure Auth0 MCP Server for Cursor to manage Auth0 tenant
-  - [ ] 2.2 Use Auth0 MCP through Cursor to create Auth0 application configuration
-  - [ ] 2.3 Use Auth0 MCP to configure user roles (therapist vs caregiver) in Auth0 tenant
-  - [ ] 2.4 Use Auth0 MCP to set up Auth0 Rules/Actions for role-based access control
-  - [ ] 2.5 Install @auth0/nextjs-auth0 SDK for Next.js App Router integration
-  - [ ] 2.6 Create Auth0 configuration file with environment variables from MCP setup
-  - [ ] 2.7 Implement Auth0 API routes for authentication handlers using Next.js SDK
-  - [ ] 2.8 Build LoginForm component with Auth0 SDK integration
-  - [ ] 2.9 Create ProtectedRoute wrapper component for route protection
-  - [ ] 2.10 Set up password reset functionality through Auth0 Universal Login
-  - [ ] 2.11 Create Zustand store for authentication state management
-  - [ ] 2.12 Write unit tests for authentication components and utilities
+- [ ] 2.0 Set up Authentication & User Management System using Supabase
+  - [ ] 2.1 Create a Supabase project and configure authentication (email/password, social, etc.)
+  - [ ] 2.2 Set up Supabase roles and policies for therapist vs caregiver (Row Level Security)
+  - [ ] 2.3 Install @supabase/supabase-js SDK for Next.js App Router integration
+  - [ ] 2.4 Create Supabase client configuration file with environment variables
+  - [ ] 2.5 Implement API routes for authentication handlers using Supabase SDK
+  - [ ] 2.6 Build LoginForm component with Supabase SDK integration
+  - [ ] 2.7 Create ProtectedRoute wrapper component for route protection (check Supabase session)
+  - [ ] 2.8 Set up password reset and email verification using Supabase Auth
+  - [ ] 2.9 Create Zustand store for authentication state management (using Supabase session)
+  - [ ] 2.10 When the use logs in it goes into a place holder dashbord screen with a logout functionlity 
+  - [ ] 2.10 Write unit tests for authentication components and utilities
 
 - [ ] 3.0 Build Therapist Dashboard and Core Navigation
   - [ ] 3.1 Create main therapist dashboard page layout
