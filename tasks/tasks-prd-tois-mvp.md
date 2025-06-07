@@ -143,7 +143,7 @@
   - [x] 1.8 Add responsive design for mobile, tablet, and desktop
   - [x] 1.9 Style components using Tailwind CSS and modern design principles
   - [x] 1.10 Implement smooth scrolling navigation and call-to-action buttons
-  - [ ] 1.11 Write unit tests for all landing page components
+  - [x] 1.11 Write unit tests for all landing page components
 
 - [ ] 2.0 Set up Authentication & User Management System using Supabase
   - [ ] 2.1 Create a Supabase project and configure authentication (email/password, social, etc.)
