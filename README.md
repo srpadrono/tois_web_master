@@ -4,15 +4,15 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Test Coverage
 
-[![Statements](https://img.shields.io/badge/Coverage--Statements-70%25-yellowgreen?style=flat-square)](coverage/lcov-report/index.html)
-[![Branches](https://img.shields.io/badge/Coverage--Branches-100%25-brightgreen?style=flat-square)](coverage/lcov-report/index.html)
-[![Functions](https://img.shields.io/badge/Coverage--Functions-82%25-green?style=flat-square)](coverage/lcov-report/index.html)
+[![Statements](https://img.shields.io/badge/Coverage--Statements-78%25-yellowgreen?style=flat-square)](coverage/lcov-report/index.html)
+[![Branches](https://img.shields.io/badge/Coverage--Branches-62%25-yellow?style=flat-square)](coverage/lcov-report/index.html)
+[![Functions](https://img.shields.io/badge/Coverage--Functions-65%25-yellow?style=flat-square)](coverage/lcov-report/index.html)
 [![Lines](https://img.shields.io/badge/Coverage--Lines-0%25-red?style=flat-square)](coverage/lcov-report/index.html)
 
 **Current Coverage Statistics:**
-- **Statements:** 70%
-- **Branches:** 100%
-- **Functions:** 82%
+- **Statements:** 78%
+- **Branches:** 62%
+- **Functions:** 65%
 - **Lines:** 0%
 
 ### Coverage by Component
